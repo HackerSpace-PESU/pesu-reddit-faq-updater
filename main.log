@@ -1,0 +1,94 @@
+2024-04-27 00:02:39,566 - INFO - main.py:<module>:MainThread:18 - Starting script on 27 April 2024 12:02:39 AM
+2024-04-27 00:02:39,566 - INFO - main.py:<module>:MainThread:20 - Initializing Reddit handler
+2024-04-27 00:02:39,567 - INFO - main.py:<module>:MainThread:22 - Fetching wiki page
+2024-04-27 00:02:39,567 - INFO - main.py:<module>:MainThread:24 - Fetching FAQs
+2024-04-27 00:02:41,072 - WARNING - reddit.py:get_answer__and_upvotes_from_comment_or_post_url:Thread-15 (get_answer__and_upvotes_from_comment_or_post_url):50 - Failed to fetch answer for http://better-pes.vercel.app
+Traceback (most recent call last):
+  File "/home/aditeyabaral/miniconda3/envs/pesu-reddit-faq/lib/python3.10/site-packages/praw/models/reddit/comment.py", line 67, in id_from_url
+    comment_index = parts.index("comments")
+ValueError: 'comments' is not in list
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/aditeyabaral/pesu-reddit-faq-updater/src/reddit.py", line 41, in get_answer__and_upvotes_from_comment_or_post_url
+    comment = self.client.comment(url=url)
+  File "/home/aditeyabaral/miniconda3/envs/pesu-reddit-faq/lib/python3.10/site-packages/praw/util/deprecate_args.py", line 43, in wrapped
+    return func(**dict(zip(_old_args, args)), **kwargs)
+  File "/home/aditeyabaral/miniconda3/envs/pesu-reddit-faq/lib/python3.10/site-packages/praw/reddit.py", line 665, in comment
+    return models.Comment(self, id=id, url=url)
+  File "/home/aditeyabaral/miniconda3/envs/pesu-reddit-faq/lib/python3.10/site-packages/praw/models/reddit/comment.py", line 159, in __init__
+    self.id = self.id_from_url(url)
+  File "/home/aditeyabaral/miniconda3/envs/pesu-reddit-faq/lib/python3.10/site-packages/praw/models/reddit/comment.py", line 69, in id_from_url
+    raise InvalidURL(url)
+praw.exceptions.InvalidURL: Invalid URL: http://better-pes.vercel.app
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/aditeyabaral/pesu-reddit-faq-updater/src/reddit.py", line 46, in get_answer__and_upvotes_from_comment_or_post_url
+    post = self.client.submission(url=url)
+  File "/home/aditeyabaral/miniconda3/envs/pesu-reddit-faq/lib/python3.10/site-packages/praw/util/deprecate_args.py", line 43, in wrapped
+    return func(**dict(zip(_old_args, args)), **kwargs)
+  File "/home/aditeyabaral/miniconda3/envs/pesu-reddit-faq/lib/python3.10/site-packages/praw/reddit.py", line 981, in submission
+    return models.Submission(self, id=id, url=url)
+  File "/home/aditeyabaral/miniconda3/envs/pesu-reddit-faq/lib/python3.10/site-packages/praw/models/reddit/submission.py", line 597, in __init__
+    self.id = self.id_from_url(url)
+  File "/home/aditeyabaral/miniconda3/envs/pesu-reddit-faq/lib/python3.10/site-packages/praw/models/reddit/submission.py", line 487, in id_from_url
+    raise InvalidURL(url)
+praw.exceptions.InvalidURL: Invalid URL: http://better-pes.vercel.app
+
+2024-04-27 00:02:41,757 - WARNING - reddit.py:get_answer__and_upvotes_from_comment_or_post_url:Thread-14 (get_answer__and_upvotes_from_comment_or_post_url):50 - Failed to fetch answer for https://discord.gg/KUSydtjaAh
+Traceback (most recent call last):
+  File "/home/aditeyabaral/miniconda3/envs/pesu-reddit-faq/lib/python3.10/site-packages/praw/models/reddit/comment.py", line 67, in id_from_url
+    comment_index = parts.index("comments")
+ValueError: 'comments' is not in list
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/aditeyabaral/pesu-reddit-faq-updater/src/reddit.py", line 41, in get_answer__and_upvotes_from_comment_or_post_url
+    comment = self.client.comment(url=url)
+  File "/home/aditeyabaral/miniconda3/envs/pesu-reddit-faq/lib/python3.10/site-packages/praw/util/deprecate_args.py", line 43, in wrapped
+    return func(**dict(zip(_old_args, args)), **kwargs)
+  File "/home/aditeyabaral/miniconda3/envs/pesu-reddit-faq/lib/python3.10/site-packages/praw/reddit.py", line 665, in comment
+    return models.Comment(self, id=id, url=url)
+  File "/home/aditeyabaral/miniconda3/envs/pesu-reddit-faq/lib/python3.10/site-packages/praw/models/reddit/comment.py", line 159, in __init__
+    self.id = self.id_from_url(url)
+  File "/home/aditeyabaral/miniconda3/envs/pesu-reddit-faq/lib/python3.10/site-packages/praw/models/reddit/comment.py", line 69, in id_from_url
+    raise InvalidURL(url)
+praw.exceptions.InvalidURL: Invalid URL: https://discord.gg/KUSydtjaAh
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/aditeyabaral/pesu-reddit-faq-updater/src/reddit.py", line 47, in get_answer__and_upvotes_from_comment_or_post_url
+    answer = post.selftext.strip()
+  File "/home/aditeyabaral/miniconda3/envs/pesu-reddit-faq/lib/python3.10/site-packages/praw/models/reddit/base.py", line 35, in __getattr__
+    self._fetch()
+  File "/home/aditeyabaral/miniconda3/envs/pesu-reddit-faq/lib/python3.10/site-packages/praw/models/reddit/submission.py", line 712, in _fetch
+    data = self._fetch_data()
+  File "/home/aditeyabaral/miniconda3/envs/pesu-reddit-faq/lib/python3.10/site-packages/praw/models/reddit/submission.py", line 731, in _fetch_data
+    return self._reddit.request(method="GET", params=params, path=path)
+  File "/home/aditeyabaral/miniconda3/envs/pesu-reddit-faq/lib/python3.10/site-packages/praw/util/deprecate_args.py", line 43, in wrapped
+    return func(**dict(zip(_old_args, args)), **kwargs)
+  File "/home/aditeyabaral/miniconda3/envs/pesu-reddit-faq/lib/python3.10/site-packages/praw/reddit.py", line 941, in request
+    return self._core.request(
+  File "/home/aditeyabaral/miniconda3/envs/pesu-reddit-faq/lib/python3.10/site-packages/prawcore/sessions.py", line 328, in request
+    return self._request_with_retries(
+  File "/home/aditeyabaral/miniconda3/envs/pesu-reddit-faq/lib/python3.10/site-packages/prawcore/sessions.py", line 267, in _request_with_retries
+    raise self.STATUS_EXCEPTIONS[response.status_code](response)
+prawcore.exceptions.NotFound: received 404 HTTP response
+
+2024-04-27 00:02:41,768 - WARNING - connectionpool.py:_put_conn:Thread-4 (get_answer__and_upvotes_from_comment_or_post_url):330 - Connection pool is full, discarding connection: oauth.reddit.com. Connection pool size: 10
+2024-04-27 00:02:41,769 - WARNING - connectionpool.py:_put_conn:Thread-18 (get_answer__and_upvotes_from_comment_or_post_url):330 - Connection pool is full, discarding connection: oauth.reddit.com. Connection pool size: 10
+2024-04-27 00:02:41,774 - WARNING - connectionpool.py:_put_conn:Thread-11 (get_answer__and_upvotes_from_comment_or_post_url):330 - Connection pool is full, discarding connection: oauth.reddit.com. Connection pool size: 10
+2024-04-27 00:02:41,780 - WARNING - connectionpool.py:_put_conn:Thread-9 (get_answer__and_upvotes_from_comment_or_post_url):330 - Connection pool is full, discarding connection: oauth.reddit.com. Connection pool size: 10
+2024-04-27 00:02:41,782 - WARNING - connectionpool.py:_put_conn:Thread-6 (get_answer__and_upvotes_from_comment_or_post_url):330 - Connection pool is full, discarding connection: oauth.reddit.com. Connection pool size: 10
+2024-04-27 00:02:41,784 - WARNING - connectionpool.py:_put_conn:Thread-8 (get_answer__and_upvotes_from_comment_or_post_url):330 - Connection pool is full, discarding connection: oauth.reddit.com. Connection pool size: 10
+2024-04-27 00:02:41,786 - WARNING - connectionpool.py:_put_conn:Thread-13 (get_answer__and_upvotes_from_comment_or_post_url):330 - Connection pool is full, discarding connection: oauth.reddit.com. Connection pool size: 10
+2024-04-27 00:02:41,791 - WARNING - connectionpool.py:_put_conn:Thread-10 (get_answer__and_upvotes_from_comment_or_post_url):330 - Connection pool is full, discarding connection: oauth.reddit.com. Connection pool size: 10
+2024-04-27 00:02:41,831 - WARNING - connectionpool.py:_put_conn:Thread-7 (get_answer__and_upvotes_from_comment_or_post_url):330 - Connection pool is full, discarding connection: oauth.reddit.com. Connection pool size: 10
+2024-04-27 00:02:41,832 - INFO - main.py:<module>:MainThread:26 - Found 20 FAQs
+2024-04-27 00:02:41,832 - INFO - main.py:<module>:MainThread:41 - Updating wiki page
+2024-04-27 00:02:42,617 - INFO - main.py:<module>:MainThread:43 - Successfully updated 20 FAQs on 27 April 2024 12:02:39 AM
