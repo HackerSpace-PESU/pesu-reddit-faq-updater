@@ -11,7 +11,7 @@ markdown = f""
 
 for faq in faqs:
     question = faq['question']
-    question_md = f"**{question}**\n"
+    question_md = f"# **{question}**\n\n"
     answer = faq['answer']
     answer_md = f"{answer}\n\n---\n\n"
     markdown += question_md + answer_md
