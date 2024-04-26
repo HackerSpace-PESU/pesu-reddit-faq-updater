@@ -3,7 +3,7 @@ import re
 import praw
 from tqdm.auto import tqdm
 from typing import Optional
-
+import threading
 class PESURedditHandler:
     def __init__(self):
         self.client = praw.Reddit(
@@ -22,48 +22,51 @@ class PESURedditHandler:
     def get_submission(self, url: str) -> Optional[praw.models.Submission]:
         return self.client.submission(url=url)
     
+    def get_answer__and_upvotes_from_comment_or_post_url(self, url: str, faqs: list, idx: int) -> Optional[str]:
+        try:
+            comment = self.client.comment(url=url)
+            answer = comment.body.strip()
+            upvotes = comment.score
+        except praw.exceptions.InvalidURL:
+            try:
+                post = self.client.submission(url=url)
+                answer = post.selftext.strip()
+                upvotes = post.score
+            except Exception:
+                answer = url
+                upvotes = 1
+        except Exception:
+            answer = url
+            upvotes = 1
+
+        answer = re.sub(r"\n+", "\n\n", answer)
+        faqs[idx]["answer"] = answer
+        faqs[idx]["upvotes"] = upvotes
+    
     def get_formatted_faqs(self):
         # fetch the FAQs post and obtain the markdown text
         faq_post = self.get_submission('https://www.reddit.com/r/PESU/comments/14c1iym/faqs/')
         content = faq_post.selftext
 
-        # skip these links
-        skip = [
-            # "https://www.reddit.com/r/PESU/comments/14c1jiw/how_to_ask_a_question_on_rpesu/",
-            # "https://www.reddit.com/r/PESU/comments/142gani/pesu_discord/"
-        ]
-
         # find all markdown text which have a link: [example test for link](https://example.com)
         question_links = re.findall(r'\[(.*?)\]\((.*?)\)', content)
-        question_data = list()
-        for question, link in tqdm(question_links, desc="Fetching FAQs"):
-            try:
-                comment = self.client.comment(url=link)
-                answer = comment.body.strip()
-                upvotes = comment.score
-            except praw.exceptions.InvalidURL:
-                try:
-                    post = self.client.submission(url=link)
-                    answer = post.selftext.strip()
-                    upvotes = post.score
-                except Exception:
-                    answer = link
-                    upvotes = 1
-            except Exception:
-                answer = link
-                upvotes = 1
 
-            if link in skip:
-                continue
+        total_faqs = len(question_links)
+        faqs = [None] * total_faqs
+        threads = [None] * total_faqs
+        for idx, (question, link) in enumerate(question_links):
+            faqs[idx] = {
+                'question': question,
+                'link': link
+            }
+            threads[idx] = threading.Thread(
+                target=self.get_answer__and_upvotes_from_comment_or_post_url, 
+                args=(link, faqs, idx)
+            )
+            threads[idx].start()
+        
+        for thread in threads:
+            thread.join()
 
-            answer = re.sub(r"\n+", "\n\n", answer)
-
-            # add the question and answer to the listt
-            question_data.append({
-                "question": question.strip(),
-                "answer": answer,
-                "upvotes": upvotes,
-                "link": link,
-            })
-
-        return question_data
+        print(f"Total FAQs: {total_faqs}")
+        return faqs
